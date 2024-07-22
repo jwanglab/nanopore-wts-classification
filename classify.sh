@@ -32,8 +32,8 @@ fi
 stats=$(fastat -c $fq | tail -n1);
 aligned_reads=$(awk '{tot+=$2}END{printf "%d", tot}' $cts);
 unique_genes=$(awk '{if($2>0)ct++}END{printf "%d", ct}' $cts);
-shannon_entropy=$(python src/tx_shannon_entropy.py $cts);
+shannon_entropy=$(python3 src/tx_shannon_entropy.py $cts);
 echo -e "seq_id\tfile\tn_seqs\ttotal_size\tavg_size\tmedian\tmaximum\tN50\taligned_reads\tunique_genes\tshannon_entropy" > $outdir/${prefix}.stats.tsv;
 echo -e "${prefix}\t${stats}\t${aligned_reads}\t${unique_genes}\t${shannon_entropy}" >> $outdir/${prefix}.stats.tsv;
 
-python src/classify.py $model $cts $ensembl > $outdir/${prefix}.classification.tsv
+python3 src/classify.py $model $cts $ensembl > $outdir/${prefix}.classification.tsv

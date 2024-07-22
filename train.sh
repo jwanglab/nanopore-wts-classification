@@ -16,12 +16,12 @@ ensembl=data/ensembl_109_grch38.tsv
 
 db=${prefix}_db.gem_df.pkl
 if [ ! -s $db ]; then
-  python src/build_training_db3.py $metadata $db $ensembl
+  python3 src/build_training_db3.py $metadata $db $ensembl
 fi
 
 nonzero=0.9
 model="${prefix}_model.${nonzero}.pkl"
 
 if [ ! -s $model ]; then
-  python src/train_pls_svm.py $db $metadata $model --nonzero $nonzero
+  python3 src/train_pls_svm.py $db $metadata $model --nonzero $nonzero
 fi
